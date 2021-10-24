@@ -1,0 +1,38 @@
+{% extends 'aplicacion/base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="col">
+    <div class="card">
+      <div class="card-header">
+        Titulo: {{data.titulo}}
+      </div>
+      <div class="card-body">
+        {{map|safe}}
+      </div>
+    </div>
+</div>
+
+<script>
+
+  $(document).ready(function () {
+    
+  $('#tabla1').DataTable({
+    "language": {
+      url:"{% static 'js/Spanish.json' %}"
+    },
+  });
+  $('.dataTables_length').addClass('bs-select');
+  });
+</script>
+
+
+
+
+
+
+      {{tabla|safe}}
+
+
+
+{% endblock %}

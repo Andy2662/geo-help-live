@@ -1,0 +1,48 @@
+<!DOCTYPE html>  
+
+<html lang="en">  
+<head>  
+    <meta charset="UTF-8">  
+    <title>Login</title>  
+    {% load static %}  
+
+    <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet">  
+    <script src="{% static 'js/jquery-3.2.1.slim.min.js' %}"></script>
+    <script src="{% static 'js/popper.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <link href="{% static 'css/register.css' %}" rel="stylesheet">  
+
+
+</head>  
+<form id='login-form' action="" method='post'>
+<div class="container register-form">
+    <div class="form">
+        <div class="note">
+            <p>Ingresa a la aplicacion</p>
+        </div>
+
+        <div class="form-content">
+            
+            <div class="row">
+                {% csrf_token %}
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <input type="text" class="form-control" name="username" autocomplete="nope" placeholder="Usuario" value=""/>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <input type="password" class="form-control" name="password" autocomplete="nope" placeholder="Contraseña" value=""/>
+                    </div>
+                </div>
+            </div>
+            <button type="submit" class="btnSubmit">Ingresar</button>
+
+            No tienes una cuenta? <a href="{% url 'register' %}">Registrate!</a>
+        </div>
+        {% for message in messages %}
+            <p id="messages">{{message}}</p>
+        {% endfor %}
+    </div>
+</div>
+</form>

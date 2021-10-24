@@ -1,0 +1,53 @@
+{% extends 'aplicacion/base.html' %}
+
+{% block content %}
+
+   <h2>Lista csv</h2>
+    <p>
+        <a href="{% url 'subir_csv' %}" class="btn btn-primary btn-sm">Cargar CSV</a>
+    </p>
+
+   <table class="table mb-0">
+       <thead>
+           <tr>
+               <th>Título</th>
+               <th>Fecha</th>
+               <th>Comentario</th>
+               <th>
+                   Visualizar
+   
+                </th>
+               <th>Decargar</th>
+               <th>Borrar</th>
+           </tr>
+       </thead>
+       <tbody>
+        {% for datos in datos %}
+            <tr>
+                <td>{{datos.titulo}}</td>
+                <td>{{datos.fecha}}</td>
+                <td>{{datos.comentario}}</td>
+                <td>
+ 
+                    <a href="{% url 'ver_csv' datos.pk %}" target="_blank" class="btn btn-primary btn-sm" >Ver CSV</a>
+
+                </td>
+                <td>
+                    <a href="{{ datos.archivocsv.url }}" class="btn btn-primary btn-sm" target="_blank">Descargar CSV</a>
+                </td>
+                <td>
+                    <form method="post" id="borrar" action="{% url 'borrar_csv' datos.pk %}">
+                        {% csrf_token %} 
+                        <button type="submit" name="form_type" value="borrar" class="btn btn-danger btn-sm">Borrar CSV</button>                      
+                    </form>
+                    
+                </td>
+            </tr>
+
+        {% endfor %} 
+
+       </tbody>
+   </table>
+
+
+{% endblock %}

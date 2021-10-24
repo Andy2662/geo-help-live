@@ -1,0 +1,5 @@
+latitud,longitud,pot,usuario,fecha,test_name,observacion,operador,rssi,torre,pot_db
+-17.356838,-66.200066,-90,andres,2021-06-09 18:37:26.668866,Test1,nada,Tigo,26,torre,1.0
+-17.394645,-66.158462,-100,andres,2021-06-08 15:12:42.663153,Test1,None,Viva,27,monopolo,0.8
+-17.39359,-66.158631,-110,andres,2021-06-08 15:10:26.659591,Test1,None,Tigo,26,monopolo,0.6000000000000001
+-17.392617,-66.158829,-120,andres,2021-06-08 15:09:52.673752,Test1,None,Entel,27,torre,0.4

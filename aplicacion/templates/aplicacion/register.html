@@ -1,0 +1,62 @@
+<!DOCTYPE html>  
+
+<html lang="en">  
+<head>  
+    <meta charset="UTF-8">  
+    <title>Registro</title>  
+    {% load static %}  
+
+    <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet">  
+    <script src="{% static 'js/jquery-3.2.1.slim.min.js' %}"></script>
+    <script src="{% static 'js/popper.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <link href="{% static 'css/register.css' %}" rel="stylesheet">  
+
+
+
+
+</head>  
+
+
+
+
+
+<form method="POST" action="">
+{% csrf_token %}
+<div class="container register-form">
+    <div class="form">
+        <div class="note">
+            <p>Registro de la alpicacion</p>
+        </div>
+
+        <div class="form-content">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        Ingresa tu nombre de Usuario {{form.username}}
+                    </div>
+                    <div class="form-group">
+                        Ingresa tu correo electrónico {{form.email}}
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        Ingresa tu contraseña {{form.password1}}
+                    </div>
+                    <div class="form-group">
+                        Repiete tu contraseña {{form.password2}}
+                    </div>
+                </div>
+            </div>
+            <button type="submit" class="btnSubmit">Crear Usuario</button>
+            Ya tienes una cuenta? <a href="{% url 'login' %}">Ingresa!</a>
+            {{form.errors}}
+        </div>
+
+    </div>
+</div>
+
+
+
+
+</form>

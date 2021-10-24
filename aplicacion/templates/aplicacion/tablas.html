@@ -1,0 +1,20 @@
+<head> <title> MOSTRANDO DATOS</title></head>
+<body><center>
+    <h1>mysql</h1>
+    <h3>tuto</h3>
+    <hr/>
+    <ul>
+        {% for tablas in DatosDelInstrumento %}
+        <li>Id : {{tablas.id}}</li>
+        <li>LATITUD : {{tablas.LATITUD}}</li>
+        <li>LONGITUD : {{tablas.LONGITUD}}</li>
+        <li>IMSI : {{tablas.IMSI}}</li>
+        <li>OPERADOR : {{tablas.OPERADOR}}</li>
+        <li>FECHA : {{tablas.FECHA}}</li>
+        
+        <hr/>
+        
+        {% endfor %}
+
+    </ul>
+</center></body>

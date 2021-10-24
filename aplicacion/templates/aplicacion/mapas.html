@@ -1,0 +1,136 @@
+{% extends 'aplicacion/base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+
+
+{% block content %}
+
+<script>
+
+  $(document).ready(function () {
+    
+  $('#tabla1').DataTable({
+    "language": {
+      url:"{% static 'js/Spanish.json' %}"
+    },
+  });
+  $('.dataTables_length').addClass('bs-select');
+  });
+</script>
+
+<head><title>Instrumento</title></head>
+
+<div class="container-fluid full-width">
+  <div class="row align-items-center">
+    <div class="col-8">
+      <div class="card">
+        <div class="card-header">
+          Mapa
+        </div>
+        <div class="card-body">
+          {{map|safe}}
+        </div>
+      </div>
+    </div>
+    <div class="col-4">
+      <div class="card">
+        <div class="card-header">
+          Captura de datos
+        </div>
+        <div class="card card-body">
+          <form action ="" method="POST" autocomplete="off">
+            {% csrf_token %}
+
+            {% for field in form.visible_fields %}
+              <div class="col">
+                <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                {{ field|add_class:'form-control' }}
+                {% for error in field.errors %}
+                      <span class="help-block">{{ error }}</span>
+                {% endfor %}
+              </div>
+            {% endfor %}
+            <br>
+            <div class="card text-center">
+              <button type="submit" class="btn btn-primary btn-lg btn-block">Confirmar</button>
+                 
+            </div>
+          </form>
+          <div class="card text-center">
+            <a class="btn btn-primary btn-lg btn-block" role="button" href="{% url 'app' %}">Reset Test</a>   
+          </div>
+        </div>
+      </div>
+    </div>  
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+<div class="container-fluid full-width">
+  <div class="row align-items-center">
+    <div class="col">
+      <div class="card">
+        <div class="card-header">
+          Pruebas con el mismo nombre
+        </div>
+        <div class="card-body">
+          <table id="tabla1" class= "table table-sm mb-0">
+            <thead>
+              <tr>
+                <th>Usuario:</th>
+                <!-- <th>Id: </th>--> 
+                <th>Fecha:</th>
+                <!-- <th>IMSI:</th>--> 
+                <!-- <th>MCC:</th>--> 
+                <!-- <th>MNC:</th>--> 
+                <th>Nombre de la prueba:</th>
+                <th>Observacion:</th>
+                <th>Operador:</th>
+                <!-- <th>Latitud:</th>--> 
+                <!-- <th>Longitud:</th>--> 
+                <th>Potencia dBm</th>
+                <th>Rssi</th>
+                <!-- <th>Modelo:</th>--> 
+                <!-- <th>Imei:</th>--> 
+                <!-- <th>Marca:</th>--> 
+              </tr>
+            </thead>
+            <tbody>
+              {% for datos in datos %}
+              <tr>
+                <td>{{datos.usuario}}</td>
+                <!-- <td>{{datos.id_usr}}</td>-->   
+                <td>{{datos.fecha}}</td>
+                <!-- <td>{{datos.imsi}}</td>-->   
+                <!-- <td>{{datos.mcc}}</td>-->   
+                <!-- <td>{{datos.mnc}}</td>-->   
+                <td>{{datos.test_name}}</td>
+                <td>{{datos.observacion}}</td> 
+                <td>{{datos.operador}}</td>  
+                <!-- <td>{{datos.latitud}}</td>--> 
+                <!-- <td>{{datos.longitud}}</td>-->  
+                <td>{{datos.pot_db}}</td>   
+                <td>{{datos.rssi}}</td>
+                <!-- <td>{{datos.modelo}}</td>-->   
+                <!-- <td>{{datos.imei}}</td>-->   
+                <!-- <td>{{datos.marca}}</td>--> 
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+{% endblock %}
+

@@ -1,0 +1,82 @@
+{% load static %}
+<style>
+  .hello-msg{
+    
+    font-size: 15px;
+    color:#fff;
+
+  }
+</style>
+<script>
+  function myFunction() {
+    var txt;
+    if (confirm("Press a button!")) {
+      txt = "You pressed OK!";
+    } else {
+      txt = "You pressed Cancel!";
+    }
+    document.getElementById("apagar").innerHTML = txt;
+  }
+  </script>
+
+<nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
+  <div class="container-fluid">
+
+      <a class="navbar-brand" href="#">
+        <img src="{% static 'images/logo2.png' %}" width="200" height="">
+      </a>
+
+    
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="{% url 'home' %}">Inicio</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Manual</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Aplicaciones
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item" href="{% url 'app' %}">Instrumento</a></li>
+            <li><a class="dropdown-item" href="{% url 'tablas' %}">Graficador</a></li>
+            <li><a class="dropdown-item" href="{% url 'torres' %}">Torres</a></li>
+
+            <li><a class="dropdown-item" href="{% url 'tablasV1' %}">GraficadorV1</a></li>
+          </ul>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Usuario
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item" href="{% url 'subir_csv' %}">Subir CSV</a></li>
+            <li><a class="dropdown-item" href="{% url 'user_csv' %}">Descargar CSV</a></li>
+ 
+          </ul>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Opciones
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item" href="#">Base de datos</a></li>
+            <li><a onclick="myFunction()" id="apagar" class="dropdown-item" href="{% url 'poweroff' %}">Apagar</a></li>
+ 
+          </ul>
+        </li>
+     
+      </ul>
+    </div>
+  </div>
+  <div>
+  <span class="hello-msg">Hola, {{request.user}}</span>
+  <span><a class="hello-msg" href="{% url 'logout' %}">Salir</a></span>
+  
+  </div>
+</nav>

@@ -1,0 +1,12 @@
+{% extends 'aplicacion/base.html' %}
+
+{% block content %}
+
+   <h2>Subir csv</h2>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form }}
+        <button type="submit" class="btn btn-primary">Subir CSV</button>
+    </form>
+
+{% endblock %}

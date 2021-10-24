@@ -1,0 +1,152 @@
+{% extends 'aplicacion/base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block content %}
+
+<script>
+
+    $(document).ready(function () {
+      
+    $('#tabla1').DataTable({
+      "language": {
+        url:"{% static 'js/Spanish.json' %}"
+      },
+    });
+    $('.dataTables_length').addClass('bs-select');
+    });
+  </script>
+  
+  <head><title>Señal torre</title></head>
+  
+  <div class="container-fluid full-width">
+    <div class="row align-items-center">
+      <div class="col-8">
+        <div class="card">
+          <div class="card-header">
+            {{tower_d.nombre}}
+          </div>
+          <div class="card-body">
+            {{map|safe}}
+          </div>
+        </div>
+      </div>
+      <div class="col-4">
+        <div class="card">
+          <div class="card-header">
+            Insertar muestra de señal
+          </div>
+          <div class="card card-body">
+            <form method="POST" autocomplete="off" name="add_tower" action="{% url 'tower_details' tower_d.pk %}">
+              {% csrf_token %}
+  
+              {% for field in form.visible_fields %}
+                <div class="col">
+                  <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                  {{ field|add_class:'form-control' }}
+                  {% for error in field.errors %}
+                        <span class="help-block">{{ error }}</span>
+                  {% endfor %}
+                </div>
+              {% endfor %}
+              <br>
+              <div class="card text-center">
+                <button type="submit" class="btn btn-primary btn-lg btn-block">Confirmar</button>
+                   
+              </div>
+            </form>
+            <div class="card text-center">
+              <a class="btn btn-primary btn-lg btn-block" role="button" href="{% url 'tower_details' tower_d.pk %}">Reset Test</a>   
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            Torre:
+          </div>
+          <div class="card-body">
+            <ul class="list-group">
+              <li class="list-group-item active" aria-current="true">Data de la torre</li>
+              <li class="list-group-item">Nombre: {{tower_d.nombre}}</li>
+              <li class="list-group-item">Fecha: {{tower_d.fecha}}</li>
+              <li class="list-group-item">Observaciones: {{tower_d.observacion}}</li>
+              <li class="list-group-item">Tipo de torre: {{tower_d.torre}}</li>
+              <li class="list-group-item">Hubicacion: {{tower_d.latitud}}, {{tower_d.longitud}}</li>
+              <li class="list-group-item">Altura: {{tower_d.altura}}</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>  
+    </div>
+  </div>
+
+  <div class="container-fluid full-width">
+    <div class="row align-items-center">
+      <div class="col-8">
+        <div class="card">
+          <div class="card-header">
+            Todas las muestras
+          </div>
+          <div class="card-body">
+            <table id="tabla1" class= "table table-sm mb-0">
+              <thead>
+                <tr>
+                  <th>Test</th>
+                  <th>Fecha</th>
+                  <th>Observacion</th>
+                  <th>Operador</th>
+                  <th>Potencia</th>
+                  <th>Distancia</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for datos in datos %}
+                <tr>
+                  <td>{{datos.test_name}}</td>                 
+                  <td>{{datos.fecha}}</td> 
+                  <td>{{datos.observacion}}</td>     
+                  <td>{{datos.operador}}</td>  
+                  <td>{{datos.pot_db}}</td>    
+                  <td>{{datos.distancia}}</td>   
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+  
+      <div class="col-4">
+        <div class="card">
+          <div class="card-header">
+            Buscar muestra
+          </div>
+          <div class="card card-body">
+              <form method="get">
+                {% for field in filtro.form.visible_fields %}
+                
+                  <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                  {{ field|add_class:'form-control' }}
+                  {% for error in field.errors %}
+                    <span class="help-block">{{ error }}</span>
+                  {% endfor %}
+               
+                {% endfor %}
+                <br>
+                <div class="card text-center">
+                  <button type="submit" class="btn btn-primary btn-lg btn-block">Buscar</button>
+                     
+                </div>
+              </form>
+              <div class="card text-center">
+                <a class="btn btn-primary btn-lg btn-block" role="button" href="{% url 'tower_details' tower_d.pk %}">Resetear Busqueda</a>   
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+{% endblock %}
